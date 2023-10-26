@@ -6,11 +6,15 @@ if (args.length === 0) {
 }
 
 args.forEach((timeInSeconds) => {
-  if (!isNaN(timeInSeconds) && timeInSeconds >= 0) {
+  const time = parseInt(timeInSeconds, 10);
+
+  if (!isNaN(time) && time >= 0) {
     setTimeout(() => {
-      process.stdout.write(`Beep after ${timeInSeconds} seconds'\x07'`);
-    }, timeInSeconds * 1000);
-  } else {
-    console.error(`Invalid time specified: ${timeInSeconds}`);
+      console.log(`Beep after ${time} seconds`);
+    }, time * 1000);
+  } else if (isNaN(time)) {
+    console.error(`Invalid input: "${timeInSeconds}" is not a number`);
+  } else if (time < 0) {
+    console.error(`Invalid input: "${timeInSeconds}" is a negative number`);
   }
 });
